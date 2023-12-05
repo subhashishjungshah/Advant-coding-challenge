@@ -25,17 +25,27 @@ file.on("line", (line) => {
   let arr = [];
   let char = "";
   for (let index = 0; index < line.length; index++) {
-    char += line[index];
-    if (numbers.includes(char)) {
-      arr.push(numbers.indexOf(char) + 1);
-      //   arr.push(char);
-      char = "";
-    }
+    char = line[index];
+
+    // Check whether the charackter is a number or not
     if (!isNaN(line[index])) {
       arr.push(line[index]);
       char = "";
     }
+    // Logic for adding charackters and check with array
+    char += line[index + 1] + line[index + 2];
+
+    for (let i = 1; i < 3; i++) {
+      if (numbers.includes(char)) {
+        arr.push(numbers.indexOf(char) + 1);
+        char = "";
+        break;
+      }
+      char += line[index + 3 + (i - 1)];
+      console.log(char);
+    }
   }
-  count = Number(arr[0]) * 10 + Number(arr[arr.length - 1]);
-  console.log(count);
+  console.log(arr);
+  // count = Number(arr[0]) * 10 + Number(arr[arr.length - 1]);
+  // console.log(count);
 });
